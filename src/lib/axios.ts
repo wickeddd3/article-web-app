@@ -5,7 +5,7 @@ import axios, {
   type InternalAxiosRequestConfig,
 } from "axios";
 import { getLocalStorageState } from "@/utils/local-storage";
-import { baseURL, tokenName } from "@/config/app.config";
+import { baseURL, localStorageTokenName } from "@/config/app.config";
 import { logout } from "@/utils/logout";
 
 type ApiRequestOptions = {
@@ -29,7 +29,7 @@ export const apiRequest = ({ url = "", config = {} }: ApiRequestOptions) => {
   // Request interceptor
   http.interceptors.request.use(
     async (config: InternalAxiosRequestConfig) => {
-      const accessToken = getLocalStorageState(tokenName);
+      const accessToken = getLocalStorageState(localStorageTokenName);
       if (accessToken) {
         config.headers.set("Authorization", `Bearer ${accessToken}`);
       }
