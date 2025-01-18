@@ -3,6 +3,13 @@ import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import { LoginSchema } from "@/schema/auth";
 import TextField from "@/components/input/TextField.vue";
+import { useAuthStore } from "@/stores/auth";
+import { computed } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const authStore = useAuthStore();
+const loading = computed(() => authStore.loginForm.loading);
 
 const { handleSubmit } = useForm({
   validationSchema: toTypedSchema(LoginSchema),
@@ -12,8 +19,12 @@ const { handleSubmit } = useForm({
   },
 });
 
-const onSubmit = handleSubmit((values) => {
-  console.log(values);
+const onSubmit = handleSubmit(async (values) => {
+  const isSuccess = await authStore.loginUser(values);
+  if (isSuccess) {
+    // Redirect to home page
+    router.push({ name: "dashboard" });
+  }
 });
 </script>
 
