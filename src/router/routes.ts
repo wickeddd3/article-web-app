@@ -48,6 +48,18 @@ export const routes: vR.RouteRecordRaw[] = [
         name: "companies",
         meta: { authOnly: true },
       },
+      {
+        path: "companies/create",
+        component: () => import("@/pages/NewCompanyPage.vue"),
+        name: "new-company",
+        meta: { authOnly: true },
+      },
+      {
+        path: "companies/:id/edit",
+        component: () => import("@/pages/EditCompanyPage.vue"),
+        name: "edit-company",
+        meta: { authOnly: true },
+      },
     ],
   },
   // Route for guest-only pages
