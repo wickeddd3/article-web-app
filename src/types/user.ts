@@ -8,3 +8,11 @@ export type User = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type UsersState = {
+  users: {
+    data: User[];
+    loading: boolean;
+  };
+  addUserForm: { loading: boolean };
+};
