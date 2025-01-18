@@ -88,7 +88,7 @@ onMounted(() => onSetInitialFormData());
         :disabled="loading"
       />
       <button type="submit" :disabled="loading">
-        {{ loading ? "Loading..." : "Create" }}
+        {{ loading ? "Loading..." : "Update" }}
       </button>
     </form>
   </div>
