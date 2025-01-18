@@ -27,6 +27,17 @@ export const create = async (data: UserSchemaType) => {
   }
 };
 
+export const find = async (id: number) => {
+  try {
+    return await usersResource.get({ url: `${baseUrl}/${id}` });
+  } catch (error) {
+    if (error instanceof AxiosError && error.response) {
+      return error.response;
+    }
+    throw new Error("An unexpected error occurred");
+  }
+};
+
 export const update = async (data: UserSchemaType, id: number) => {
   try {
     return await usersResource.put(data, { url: `${baseUrl}/${id}` });
