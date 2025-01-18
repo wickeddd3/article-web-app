@@ -1,5 +1,4 @@
 import { apiRequest } from "@/lib/axios";
-import { type CompanySchemaType } from "@/schema/company";
 import { AxiosError } from "axios";
 
 const baseUrl = "/api/companies";
@@ -16,7 +15,11 @@ export const list = async () => {
   }
 };
 
-export const create = async (data: CompanySchemaType) => {
+export const create = async (data: {
+  name: string;
+  status: string;
+  logo: string;
+}) => {
   try {
     return await companiesResource.post(data);
   } catch (error) {
@@ -27,7 +30,25 @@ export const create = async (data: CompanySchemaType) => {
   }
 };
 
-export const update = async (data: CompanySchemaType, id: number) => {
+export const find = async (id: number) => {
+  try {
+    return await companiesResource.get({ url: `${baseUrl}/${id}` });
+  } catch (error) {
+    if (error instanceof AxiosError && error.response) {
+      return error.response;
+    }
+    throw new Error("An unexpected error occurred");
+  }
+};
+
+export const update = async (
+  data: {
+    name: string;
+    status: string;
+    newLogo: string;
+  },
+  id: number
+) => {
   try {
     return await companiesResource.put(data, { url: `${baseUrl}/${id}` });
   } catch (error) {
