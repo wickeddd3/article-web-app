@@ -37,6 +37,7 @@ const onSubmit = handleSubmit(async (values) => {
           name="email"
           label="Email Address"
           placeholder="Enter your email"
+          :disabled="loading"
         />
       </div>
       <div>
@@ -45,9 +46,12 @@ const onSubmit = handleSubmit(async (values) => {
           label="Password"
           placeholder="••••••••"
           type="password"
+          :disabled="loading"
         />
       </div>
-      <button type="submit">Login</button>
+      <button type="submit" :disabled="loading">
+        {{ loading ? "Loading..." : "Login" }}
+      </button>
     </form>
   </div>
 </template>
