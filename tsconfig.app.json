@@ -23,7 +23,8 @@
       "@/utils/*": ["utils/*"],
       "@/schema/*": ["schema/*"],
       "@/stores/*": ["stores/*"],
-      "@/types/*": ["types/*"]
+      "@/types/*": ["types/*"],
+      "@/constants/*": ["constants/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
