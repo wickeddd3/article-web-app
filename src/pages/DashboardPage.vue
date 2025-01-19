@@ -1,21 +1,31 @@
 <script setup lang="ts">
 import { useArticlesStore } from "@/stores/articles";
 import { onMounted, computed } from "vue";
+import type { Article } from "@/types/article";
+import ArticleList from "@/components/articles/ArticleList.vue";
 
 const articlesStore = useArticlesStore();
-const articles = computed(() => articlesStore.articlesData);
+const publishedArticles = computed(() =>
+  articlesStore.articlesData.filter(
+    (article: Article) => article.status === "Published"
+  )
+);
+const forEditArticles = computed(() =>
+  articlesStore.articlesData.filter(
+    (article: Article) => article.status === "ForEdit"
+  )
+);
 
 onMounted(() => articlesStore.fetchArticles());
 </script>
 
 <template>
   <div>
+    <h1>Dashboard</h1>
     <RouterLink :to="`/articles/create`">Create new article</RouterLink>
-    <ul>
-      <li v-for="article in articles" :key="article.id">
-        {{ article.title }}
-        <RouterLink :to="`/articles/${article.id}/edit`">Edit</RouterLink>
-      </li>
-    </ul>
+    <div>
+      <ArticleList title="For Edit" :articles="forEditArticles" />
+      <ArticleList title="Published" :articles="publishedArticles" />
+    </div>
   </div>
 </template>
