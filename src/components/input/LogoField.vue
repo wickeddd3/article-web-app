@@ -30,6 +30,11 @@ const handleFileChange = (event: Event) => {
   }
 };
 
+// Handle blur event
+const handleBlur = () => {
+  setTouched(true);
+};
+
 // Reactive display for the selected file name
 const fileName = computed(() =>
   value.value instanceof File ? value.value.name : "No file selected"
@@ -45,7 +50,7 @@ const fileName = computed(() =>
       :accept="props.accept"
       :required="props.required"
       @change="handleFileChange"
-      @blur="setTouched"
+      @blur="handleBlur"
     />
     <p>{{ fileName }}</p>
     <span v-if="errorMessage">{{ errorMessage }}</span>
