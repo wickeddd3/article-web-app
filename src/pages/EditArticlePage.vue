@@ -8,7 +8,7 @@ import {
 import TextField from "@/components/input/TextField.vue";
 import SelectField from "@/components/input/SelectField.vue";
 import DateField from "@/components/input/DateField.vue";
-import LogoField from "@/components/input/LogoField.vue";
+import ImageField from "@/components/input/ImageField.vue";
 import { useArticlesStore } from "@/stores/articles";
 import { useCompaniesStore } from "@/stores/companies";
 import { useAuthStore } from "@/stores/auth";
@@ -118,7 +118,7 @@ onMounted(() => {
         @update:content="(value) => setFieldValue('content', value)"
       />
       {{ errors.content }}
-      <LogoField name="newImage" label="Image" />
+      <ImageField name="newImage" label="Image" />
       <button type="button" :disabled="loading" @click="onSubmit('save')">
         {{ loading ? "Loading..." : "Save" }}
       </button>

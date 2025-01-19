@@ -4,7 +4,7 @@ import { toTypedSchema } from "@vee-validate/zod";
 import { EditCompanySchema } from "@/schema/company";
 import TextField from "@/components/input/TextField.vue";
 import SelectField from "@/components/input/SelectField.vue";
-import LogoField from "@/components/input/LogoField.vue";
+import ImageField from "@/components/input/ImageField.vue";
 import { useCompaniesStore } from "@/stores/companies";
 import { computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -59,7 +59,7 @@ onMounted(() => onSetInitialFormData());
         :options="Object.values(STATUSES)"
         placeholder="Select a status"
       />
-      <LogoField name="newLogo" label="Company Logo" />
+      <ImageField name="newLogo" label="Company Logo" />
       <button type="submit" :disabled="loading">
         {{ loading ? "Loading..." : "Update" }}
       </button>

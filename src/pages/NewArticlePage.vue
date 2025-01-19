@@ -5,7 +5,7 @@ import { ArticleSchema } from "@/schema/article";
 import TextField from "@/components/input/TextField.vue";
 import SelectField from "@/components/input/SelectField.vue";
 import DateField from "@/components/input/DateField.vue";
-import LogoField from "@/components/input/LogoField.vue";
+import ImageField from "@/components/input/ImageField.vue";
 import { useArticlesStore } from "@/stores/articles";
 import { useCompaniesStore } from "@/stores/companies";
 import { useAuthStore } from "@/stores/auth";
@@ -87,7 +87,7 @@ onMounted(() => companiesStore.fetchCompanies());
         @update:content="(value) => setFieldValue('content', value)"
       />
       {{ errors.content }}
-      <LogoField name="image" label="Image" />
+      <ImageField name="image" label="Image" />
       <button type="submit" :disabled="loading">
         {{ loading ? "Loading..." : "Create" }}
       </button>

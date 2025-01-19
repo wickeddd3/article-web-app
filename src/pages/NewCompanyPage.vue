@@ -4,7 +4,7 @@ import { toTypedSchema } from "@vee-validate/zod";
 import { CompanySchema } from "@/schema/company";
 import TextField from "@/components/input/TextField.vue";
 import SelectField from "@/components/input/SelectField.vue";
-import LogoField from "@/components/input/LogoField.vue";
+import ImageField from "@/components/input/ImageField.vue";
 import { useCompaniesStore } from "@/stores/companies";
 import { computed } from "vue";
 import { useRouter } from "vue-router";
@@ -19,7 +19,7 @@ const { handleSubmit } = useForm({
   initialValues: {
     name: "",
     status: "Active",
-    logo: null,
+    logo: undefined,
   },
 });
 
@@ -48,7 +48,7 @@ const onSubmit = handleSubmit(async (values) => {
         :options="Object.values(STATUSES)"
         placeholder="Select a status"
       />
-      <LogoField name="logo" label="Company Logo" />
+      <ImageField name="logo" label="Company Logo" />
       <button type="submit" :disabled="loading">
         {{ loading ? "Loading..." : "Create" }}
       </button>
