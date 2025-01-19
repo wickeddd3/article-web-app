@@ -1,5 +1,4 @@
 import { apiRequest } from "@/lib/axios";
-import { type ArticleSchemaType } from "@/schema/article";
 import { AxiosError } from "axios";
 
 const baseUrl = "/api/articles";
@@ -16,7 +15,16 @@ export const list = async () => {
   }
 };
 
-export const create = async (data: ArticleSchemaType) => {
+export const create = async (data: {
+  companyId: number | string;
+  writerId: number | string;
+  title: string;
+  link: string;
+  date: Date;
+  content: string;
+  status: string;
+  image: string;
+}) => {
   try {
     return await articlesResource.post(data);
   } catch (error) {
@@ -38,7 +46,19 @@ export const find = async (id: number) => {
   }
 };
 
-export const update = async (data: ArticleSchemaType, id: number) => {
+export const update = async (
+  data: {
+    companyId: number | string;
+    editorId?: number | string;
+    title: string;
+    link: string;
+    date: Date;
+    content: string;
+    status: string;
+    newImage: string;
+  },
+  id: number
+) => {
   try {
     return await articlesResource.put(data, { url: `${baseUrl}/${id}` });
   } catch (error) {
