@@ -1,5 +1,33 @@
-# Vue 3 + TypeScript + Vite
+# article-web-app
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Use Node.js v20.15.0
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+---
+
+#### How to run on local
+
+Install dependencies
+
+```
+yarn install
+```
+
+Create .env.local file with this value. `VITE_APP_API_BASE_URL` value is for backend api service url
+
+```
+VITE_APP_API_BASE_URL=http://localhost:3000
+VITE_APP_TOKEN_LOCAL_STORAGE_NAME=article-web-app.token
+VITE_APP_USER_LOCAL_STORAGE_NAME=article-web-app.user
+```
+
+Run development mode, http://localhost:5173
+
+```
+yarn dev
+```
+
+Generate build files
+
+```
+yarn build
+```
