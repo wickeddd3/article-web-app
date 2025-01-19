@@ -10,12 +10,29 @@ onMounted(() => companiesStore.fetchCompanies());
 
 <template>
   <div>
+    <h1>Companies</h1>
     <RouterLink :to="`/companies/create`">Create new company</RouterLink>
-    <ul>
-      <li v-for="company in companies" :key="company.id">
-        {{ company.name }}
-        <RouterLink :to="`/companies/${company.id}/edit`">Edit</RouterLink>
-      </li>
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Logo</th>
+          <th>Name</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="company in companies" :key="company.id">
+          <td>
+            <img :src="company.logo" width="120px" height="100px" />
+          </td>
+          <td>{{ company.name }}</td>
+          <td>{{ company.status }}</td>
+          <td>
+            <RouterLink :to="`/companies/${company.id}/edit`">Edit</RouterLink>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
