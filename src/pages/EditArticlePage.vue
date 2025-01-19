@@ -13,6 +13,8 @@ import { computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { ARTICLE_STATUSES } from "@/constants/options.ts";
 import { isoStringToDate } from "@/utils/date";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 const router = useRouter();
 const route = useRoute();
@@ -28,7 +30,7 @@ const companyOptions = computed(() =>
 );
 const authUser = computed(() => authStore.authUser);
 
-const { handleSubmit, setValues } = useForm({
+const { handleSubmit, setValues, values, setFieldValue, errors } = useForm({
   validationSchema: toTypedSchema(EditArticleSchema),
   initialValues: {
     companyId: 0,
@@ -99,12 +101,14 @@ onMounted(() => {
         :disabled="loading"
       />
       <DateField name="date" label="Date" placeholder="YYYY-MM-DD" />
-      <TextField
-        name="content"
-        label="Content"
-        placeholder="Enter content"
-        :disabled="loading"
+      <QuillEditor
+        :content="values.content"
+        theme="snow"
+        content-type="html"
+        toolbar="minimal"
+        @update:content="(value) => setFieldValue('content', value)"
       />
+      {{ errors.content }}
       <SelectField
         name="status"
         label="Status"

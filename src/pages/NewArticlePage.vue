@@ -12,6 +12,8 @@ import { useAuthStore } from "@/stores/auth";
 import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { ARTICLE_STATUSES } from "@/constants/options.ts";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 const router = useRouter();
 const articlesStore = useArticlesStore();
@@ -26,10 +28,9 @@ const companyOptions = computed(() =>
 );
 const authUser = computed(() => authStore.authUser);
 
-const { handleSubmit } = useForm({
+const { handleSubmit, values, setFieldValue, errors } = useForm({
   validationSchema: toTypedSchema(ArticleSchema),
   initialValues: {
-    writerId: Number(authUser.value?.id),
     companyId: 0,
     title: "",
     link: "",
@@ -41,7 +42,11 @@ const { handleSubmit } = useForm({
 });
 
 const onSubmit = handleSubmit(async (values) => {
-  const isSuccess = await articlesStore.createArticle(values);
+  const formData = {
+    ...values,
+    writerId: Number(authUser.value?.id),
+  };
+  const isSuccess = await articlesStore.createArticle(formData);
   if (isSuccess) {
     // Redirect to dashboard page
     router.push({ name: "dashboard" });
@@ -74,12 +79,14 @@ onMounted(() => companiesStore.fetchCompanies());
         :disabled="loading"
       />
       <DateField name="date" label="Date" placeholder="YYYY-MM-DD" />
-      <TextField
-        name="content"
-        label="Content"
-        placeholder="Enter content"
-        :disabled="loading"
+      <QuillEditor
+        :content="values.content"
+        theme="snow"
+        content-type="html"
+        toolbar="minimal"
+        @update:content="(value) => setFieldValue('content', value)"
       />
+      {{ errors.content }}
       <SelectField
         name="status"
         label="Status"
