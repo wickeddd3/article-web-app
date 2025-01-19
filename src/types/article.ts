@@ -8,6 +8,7 @@ export type Article = {
   link: string;
   date: string;
   content: string;
+  status: string;
   companyId: number;
   company: Company;
   writerId: number;
