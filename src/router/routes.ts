@@ -25,6 +25,18 @@ export const routes: vR.RouteRecordRaw[] = [
         meta: { authOnly: true },
       },
       {
+        path: "articles/create",
+        component: () => import("@/pages/NewArticlePage.vue"),
+        name: "new-article",
+        meta: { authOnly: true },
+      },
+      {
+        path: "articles/:id/edit",
+        component: () => import("@/pages/EditArticlePage.vue"),
+        name: "edit-article",
+        meta: { authOnly: true },
+      },
+      {
         path: "users",
         component: () => import("@/pages/UsersPage.vue"),
         name: "users",
