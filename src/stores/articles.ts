@@ -26,7 +26,7 @@ export const useArticlesStore = defineStore("articles", {
       }
       return false;
     },
-    async createArticle(formData: ArticleSchemaType) {
+    async createArticle(formData: ArticleSchemaType & { writerId: number }) {
       this.addArticleForm.loading = true;
       const data = {
         ...formData,
