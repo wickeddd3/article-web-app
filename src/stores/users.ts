@@ -44,7 +44,17 @@ export const useUsersStore = defineStore("users", {
       }
       return false;
     },
-    async updateUser(formData: UserSchemaType, id: number) {
+    async updateUser(
+      formData: {
+        firstname: string;
+        lastname: string;
+        type: string;
+        status: string;
+        email: string;
+        password: string;
+      },
+      id: number
+    ) {
       this.addUserForm.loading = true;
       const { data: updatedUser, status } = await update(formData, id);
       if (status === 200) {

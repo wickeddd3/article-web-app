@@ -1,9 +1,6 @@
 import { defineStore } from "pinia";
 import type { CompaniesState } from "@/types/company";
-import type {
-  CompanySchemaType,
-  EditCompanySchemaType,
-} from "@/schema/company";
+import type { CompanySchemaType } from "@/schema/company";
 import { create, find, list, update } from "@/services/companies";
 import { fileToDataURL } from "@/utils/file";
 
@@ -52,7 +49,10 @@ export const useCompaniesStore = defineStore("companies", {
       }
       return false;
     },
-    async updateCompany(formData: EditCompanySchemaType, id: number) {
+    async updateCompany(
+      formData: { name: string; status: string; newLogo: File | undefined },
+      id: number
+    ) {
       this.addCompanyForm.loading = true;
       const data = {
         ...formData,
