@@ -21,9 +21,9 @@ const hasArticles = computed(() => props.articles.length > 0);
 </script>
 
 <template>
-  <div v-if="hasArticles">
+  <div v-if="hasArticles" class="article-list-container">
     <h1 v-if="title">{{ title }}</h1>
-    <ul>
+    <ul class="article-list">
       <ArticleListItem
         v-for="article in articles"
         :key="article.id"

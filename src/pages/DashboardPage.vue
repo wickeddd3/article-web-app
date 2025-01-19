@@ -20,10 +20,10 @@ onMounted(() => articlesStore.fetchArticles());
 </script>
 
 <template>
-  <div>
+  <div class="dashboard-page">
     <h1>Dashboard</h1>
     <RouterLink :to="`/articles/create`">Create new article</RouterLink>
-    <div>
+    <div class="articles">
       <ArticleList title="For Edit" :articles="forEditArticles" />
       <ArticleList title="Published" :articles="publishedArticles" />
     </div>

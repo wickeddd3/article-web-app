@@ -20,13 +20,13 @@ const showArticleUserName = (user?: User) => {
 </script>
 
 <template>
-  <li>
+  <li class="article-list-item">
     <div>
       <img :src="article.image" width="120px" height="100px" />
       <div>
-        <h1>{{ article.title }}</h1>
+        <h3>{{ article.title }}</h3>
         <a :href="article.link" target="_blank">{{ article.link }}</a>
-        <h6>{{ isoStringToDate(article.date) }}</h6>
+        <h5>{{ isoStringToDate(article.date) }}</h5>
         <h4>{{ showArticleUserName(article.writer) }}</h4>
         <h4>{{ showArticleUserName(article.editor) }}</h4>
       </div>

@@ -1,0 +1,10 @@
+.dashboard-page {
+  width: 100%;
+  padding: 18px;
+}
+.articles {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 2;
+}
