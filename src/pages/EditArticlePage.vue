@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
-import { EditArticleSchema } from "@/schema/article";
+import {
+  EditArticleSchema,
+  type EditArticleSchemaType,
+} from "@/schema/article";
 import TextField from "@/components/input/TextField.vue";
 import SelectField from "@/components/input/SelectField.vue";
 import DateField from "@/components/input/DateField.vue";
@@ -11,7 +14,6 @@ import { useCompaniesStore } from "@/stores/companies";
 import { useAuthStore } from "@/stores/auth";
 import { computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { ARTICLE_STATUSES } from "@/constants/options.ts";
 import { isoStringToDate } from "@/utils/date";
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
@@ -29,6 +31,7 @@ const companyOptions = computed(() =>
   }))
 );
 const authUser = computed(() => authStore.authUser);
+const authUserIsEditor = computed(() => authStore.authUserIsEditor);
 
 const { handleSubmit, setValues, values, setFieldValue, errors } = useForm({
   validationSchema: toTypedSchema(EditArticleSchema),
@@ -43,9 +46,8 @@ const { handleSubmit, setValues, values, setFieldValue, errors } = useForm({
   },
 });
 
-const onSubmit = handleSubmit(async (values) => {
-  const { id, companyId, title, link, date, content, status, newImage } =
-    values;
+const updateArticle = async (values: EditArticleSchemaType, status: string) => {
+  const { id, companyId, title, link, date, content, newImage } = values;
   const formData = {
     companyId,
     editorId: Number(authUser.value?.id),
@@ -61,7 +63,14 @@ const onSubmit = handleSubmit(async (values) => {
     // Redirect to dashboard page
     router.push({ name: "all-media" });
   }
-});
+};
+
+const onSubmit = (buttonType: string) => {
+  handleSubmit(async (values) => {
+    const status = buttonType === "save" ? "ForEdit" : "Published";
+    await updateArticle(values, status);
+  })();
+};
 
 const onSetInitialFormData = async () => {
   const id = Number(route.params.id);
@@ -81,7 +90,7 @@ onMounted(() => {
 <template>
   <div class="container">
     <h1>Edit article</h1>
-    <form aria-labelledby="edit-article-form" @submit="onSubmit">
+    <form aria-labelledby="edit-article-form" @submit.prevent>
       <SelectField
         name="companyId"
         label="Company"
@@ -109,15 +118,17 @@ onMounted(() => {
         @update:content="(value) => setFieldValue('content', value)"
       />
       {{ errors.content }}
-      <SelectField
-        name="status"
-        label="Status"
-        :options="Object.values(ARTICLE_STATUSES)"
-        placeholder="Select a status"
-      />
       <LogoField name="newImage" label="Image" />
-      <button type="submit" :disabled="loading">
-        {{ loading ? "Loading..." : "Update" }}
+      <button type="button" :disabled="loading" @click="onSubmit('save')">
+        {{ loading ? "Loading..." : "Save" }}
+      </button>
+      <button
+        v-if="authUserIsEditor"
+        type="button"
+        :disabled="loading"
+        @click="onSubmit('publish')"
+      >
+        {{ loading ? "Loading..." : "Publish" }}
       </button>
     </form>
   </div>
