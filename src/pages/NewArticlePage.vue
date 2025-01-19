@@ -11,7 +11,6 @@ import { useCompaniesStore } from "@/stores/companies";
 import { useAuthStore } from "@/stores/auth";
 import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { ARTICLE_STATUSES } from "@/constants/options.ts";
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import { getCurrentDateString } from "@/utils/date";
@@ -88,12 +87,6 @@ onMounted(() => companiesStore.fetchCompanies());
         @update:content="(value) => setFieldValue('content', value)"
       />
       {{ errors.content }}
-      <SelectField
-        name="status"
-        label="Status"
-        :options="Object.values(ARTICLE_STATUSES)"
-        placeholder="Select a status"
-      />
       <LogoField name="image" label="Image" />
       <button type="submit" :disabled="loading">
         {{ loading ? "Loading..." : "Create" }}
