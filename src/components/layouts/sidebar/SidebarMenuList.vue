@@ -10,6 +10,7 @@ import { sidebarMenu } from "@/components/layouts/sidebar/sidebar-menu.ts";
       :key="item.title"
       :title="item.title"
       :link="item.link"
+      :access="item.access"
     />
   </div>
 </template>
