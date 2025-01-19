@@ -59,7 +59,7 @@ const onSubmit = handleSubmit(async (values) => {
   const isSuccess = await articlesStore.updateArticle(formData, id);
   if (isSuccess) {
     // Redirect to dashboard page
-    router.push({ name: "dashboard" });
+    router.push({ name: "all-media" });
   }
 });
 
