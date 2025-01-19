@@ -53,7 +53,6 @@ export const useArticlesStore = defineStore("articles", {
     async updateArticle(
       formData: {
         companyId: number | string;
-        // writerId: number | string;
         editorId?: number | string;
         title: string;
         link: string;
