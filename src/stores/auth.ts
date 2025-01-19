@@ -21,6 +21,7 @@ export const useAuthStore = defineStore("auth", {
   }),
   getters: {
     authUser: (state) => state.auth.user,
+    authUserIsEditor: (state) => state.auth.user?.type === "Editor",
   },
   actions: {
     async loginUser(formData: LoginSchemaType) {
