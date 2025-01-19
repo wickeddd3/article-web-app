@@ -17,11 +17,11 @@ const loading = computed(() => usersStore.addUserForm.loading);
 const { handleSubmit, setValues } = useForm({
   validationSchema: toTypedSchema(EditUserSchema),
   initialValues: {
-    id: "",
+    id: 0,
     firstname: "",
     lastname: "",
-    type: "",
-    status: "",
+    type: "Writer",
+    status: "Active",
     email: "",
     password: "",
   },
@@ -29,7 +29,14 @@ const { handleSubmit, setValues } = useForm({
 
 const onSubmit = handleSubmit(async (values) => {
   const { id, firstname, lastname, type, status, email, password } = values;
-  const formData = { firstname, lastname, type, status, email, password };
+  const formData = {
+    firstname,
+    lastname,
+    type,
+    status,
+    email,
+    password: password || "",
+  };
   const isSuccess = await usersStore.updateUser(formData, id);
   if (isSuccess) {
     // Redirect to users page
@@ -38,7 +45,7 @@ const onSubmit = handleSubmit(async (values) => {
 });
 
 const onSetInitialFormData = async () => {
-  const id = route.params.id;
+  const id = Number(route.params.id);
   const user = await usersStore.fetchUser(id);
   setValues(user);
 };

@@ -20,8 +20,7 @@ const { handleSubmit, setValues } = useForm({
   initialValues: {
     name: "",
     status: "Active",
-    // logo: "",
-    newLogo: null,
+    newLogo: undefined,
   },
 });
 
@@ -36,7 +35,7 @@ const onSubmit = handleSubmit(async (values) => {
 });
 
 const onSetInitialFormData = async () => {
-  const id = route.params.id;
+  const id = Number(route.params.id);
   const company = await companiesStore.fetchCompany(id);
   setValues(company);
 };
