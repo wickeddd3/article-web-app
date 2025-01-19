@@ -14,6 +14,7 @@ import { useRouter } from "vue-router";
 import { ARTICLE_STATUSES } from "@/constants/options.ts";
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import { getCurrentDateString } from "@/utils/date";
 
 const router = useRouter();
 const articlesStore = useArticlesStore();
@@ -34,7 +35,7 @@ const { handleSubmit, values, setFieldValue, errors } = useForm({
     companyId: 0,
     title: "",
     link: "",
-    date: "",
+    date: getCurrentDateString(),
     content: "",
     status: "ForEdit",
     image: undefined,
