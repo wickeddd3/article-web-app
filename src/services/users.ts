@@ -38,7 +38,17 @@ export const find = async (id: number) => {
   }
 };
 
-export const update = async (data: UserSchemaType, id: number) => {
+export const update = async (
+  data: {
+    firstname: string;
+    lastname: string;
+    type: string;
+    status: string;
+    email: string;
+    password: string;
+  },
+  id: number
+) => {
   try {
     return await usersResource.put(data, { url: `${baseUrl}/${id}` });
   } catch (error) {
