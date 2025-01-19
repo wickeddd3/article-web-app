@@ -10,5 +10,7 @@
   width: 400px;
   box-shadow: var(--box-shadow);
   padding: 18px;
+  background-color: #fff;
   border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }

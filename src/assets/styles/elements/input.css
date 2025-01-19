@@ -1,5 +1,6 @@
 /* Input field styles */
-input, select {
+input,
+select {
   width: 100%;
   padding: var(--spacing-sm);
   margin-bottom: var(--spacing-sm);
@@ -17,4 +18,8 @@ input:focus {
 .error-message {
   color: red;
   font-size: var(--font-size-sm);
+}
+
+form {
+  max-width: 400px;
 }

@@ -122,6 +122,7 @@ onMounted(() => {
       <button type="button" :disabled="loading" @click="onSubmit('save')">
         {{ loading ? "Loading..." : "Save" }}
       </button>
+      <br><br>
       <button
         v-if="authUserIsEditor"
         type="button"
