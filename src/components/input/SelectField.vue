@@ -54,6 +54,6 @@ const getOptionDisplay = (option: SelectOption) => {
         {{ getOptionDisplay(option).label }}
       </option>
     </select>
-    <span v-if="errorMessage">{{ errorMessage }}</span>
+    <span v-if="errorMessage" class="error-message">{{ errorMessage }}</span>
   </div>
 </template>

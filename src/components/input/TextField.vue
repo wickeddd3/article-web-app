@@ -33,5 +33,5 @@ const { value, errorMessage } = useField(props.name);
     :disabled="props.disabled"
     :autocomplete="props.name"
   />
-  <span v-if="errorMessage">{{ errorMessage }}</span>
+  <span v-if="errorMessage" class="error-message">{{ errorMessage }}</span>
 </template>

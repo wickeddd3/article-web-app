@@ -53,6 +53,6 @@ const fileName = computed(() =>
       @blur="handleBlur"
     />
     <p>{{ fileName }}</p>
-    <span v-if="errorMessage">{{ errorMessage }}</span>
+    <span v-if="errorMessage" class="error-message">{{ errorMessage }}</span>
   </div>
 </template>

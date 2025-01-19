@@ -86,7 +86,7 @@ onMounted(() => companiesStore.fetchCompanies());
         toolbar="minimal"
         @update:content="(value) => setFieldValue('content', value)"
       />
-      {{ errors.content }}
+      <span class="error-message">{{ errors.content }}</span>
       <ImageField name="image" label="Image" />
       <button type="submit" :disabled="loading">
         {{ loading ? "Loading..." : "Create" }}
