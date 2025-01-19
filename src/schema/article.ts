@@ -7,9 +7,6 @@ export const ArticleSchema = z.object({
   companyId: z
     .number({ required_error: "Company is required" })
     .min(1, { message: "Company is required" }),
-  writerId: z
-    .number({ required_error: "Writer is required" })
-    .min(1, { message: "Writer is required" }),
   title: z
     .string({ required_error: "Title is required" })
     .trim()
